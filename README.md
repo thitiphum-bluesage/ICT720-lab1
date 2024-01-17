@@ -8,6 +8,18 @@ The Local Community Event Finder App is a dynamic platform designed to connect r
 - Witchaworn Munkong
 - Saponrachate​ Thamrongweingpung​
 
+## Stakeholders
+This section outlines the key groups and individuals who have an interest or stake in the success and outcome of the Local Community Event Finder App.
+
+### Primary Stakeholders
+- **End Users (Residents, Parents, Event Organizers)**: Directly interact with the app for discovering and promoting community events.
+- **Development Team**: Responsible for the development, maintenance, and update of the app.
+
+### Secondary Stakeholders
+- **Local Businesses**: Can benefit from increased community engagement and advertising opportunities.
+- **Community Organizations**: Use the app to promote local events and initiatives.
+- **Local Authorities**: Interested in fostering community engagement and local cultural events.
+
 ## User Stories
 - **As a new resident in the city:** I want to discover local events and activities to engage with my community and make new friends.
 - **As an event organizer:** I need to promote my events to a local audience to increase attendance.
