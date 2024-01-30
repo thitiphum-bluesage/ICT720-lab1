@@ -1,7 +1,7 @@
-# Local Community Event Finder App
+# Indoor Farming Climate Monitoring and Control System
 
 ## Overview
-The Local Community Event Finder App is a dynamic platform designed to connect residents with their local community through events and activities. Whether you're a new resident, an event organizer, or a parent, this app is your guide to the community's pulse.
+The Indoor Farming Climate Monitoring and Control System is a sophisticated platform designed to optimize growing conditions in indoor farming environments. This system is essential for farm operators, managers, and technicians who seek to maintain the perfect climate for crop growth, ensuring high yields and sustainable practices.
 
 ## Contributors
 - Thitiphum Chaikarnjanakit
@@ -9,23 +9,32 @@ The Local Community Event Finder App is a dynamic platform designed to connect r
 - Saponrachate​ Thamrongweingpung​
 
 ## Stakeholders
-This section outlines the key groups and individuals who have an interest or stake in the success and outcome of our app.
-
-### Primary Stakeholders
-- **End Users (Residents, Parents, Event Organizers)**: Directly interact with the app for discovering and promoting community events.
-- **Development Team**: Responsible for the development, maintenance, and update of the app.
-
-### Secondary Stakeholders
-- **Local Businesses**: Can benefit from increased community engagement and advertising opportunities.
-- **Community Organizations**: Use the app to promote local events and initiatives.
-- **Local Authorities**: Interested in fostering community engagement and local cultural events.
+- **Farm Operators:** Directly interact with the system on a daily basis for monitoring and adjustments.
+- **Farm Managers:** Use the system for strategic planning and decision-making.
+- **Agricultural Scientists:** Analyze data for research and provide insights for improving farming techniques.
+- **Technical Support Team:** Maintain and troubleshoot the system.
+- **Investors/Farm Owners:** Interested in the overall productivity and efficiency of the farm.
 
 ## User Stories
-- **As a new resident in the city:** I want to discover local events and activities to engage with my community and make new friends.
-- **As an event organizer:** I need to promote my events to a local audience to increase attendance.
-- **As a parent:** I want to find family-friendly events nearby so I can plan outings with my children.
+- **As a farm operator:** I want to monitor real-time temperature and humidity levels to ensure optimal growing conditions for my crops.
+   - **Acceptance Criteria:**
+     1. The system displays real-time temperature and humidity data.
+     2. Data from all sensors is updated every 5 minutes.
+     3. Users can access historical data trends and analysis.
+- **As a farm manager:** I need to be alerted immediately when temperature or humidity levels deviate from the set thresholds to prevent potential crop damage.
+   - **Acceptance Criteria:**
+     1. The system sends instant alerts via email/SMS when thresholds are breached.
+     2. Alerts contain specific details about the breach (which sensor, current reading).
+     3. The system records all instances of threshold breaches for review.
+- **As a farm technician:** I want to access the system remotely to make necessary adjustments and troubleshoot issues.
+   - **Acceptance Criteria:**
+     1. The system is accessible remotely via various devices.
+     2. Users can make and save adjustments to settings remotely.
+     3. The system provides secure access with authentication protocols.
 
 ## Features
-- **Event Discovery:** Explore a variety of local events and activities based on your interests.
-- **Event Promotion:** A platform for organizers to list and promote their events to the local community.
-- **Family-Friendly Focus:** An easy-to-use filter to find events that are suitable for all ages.
+- **Real-Time Monitoring:** Continuous tracking of temperature and humidity with live updates.
+- **Automated Alerts:** Customizable alerts for deviations from optimal growing conditions.
+- **Historical Data Analysis:** Access and analyze past environmental data for better future decision-making.
+- **Remote Accessibility:** Manage and monitor the system from any location.
+- **Security and Reliability:** Secure data handling and reliable system performance.
