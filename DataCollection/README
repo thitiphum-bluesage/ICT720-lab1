@@ -1,0 +1,3 @@
+This DataCollection Directory is created by platformio to collect temperature and huminity using CucumberRS with hts221 sensor bt thitiphum's enviroment (my home kitchen)
+
+For now this board is only doing log them and not store to real-time database yet
