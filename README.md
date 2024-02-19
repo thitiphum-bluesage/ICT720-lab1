@@ -1,7 +1,7 @@
-# Indoor Farming Climate Monitoring and Control System
+# Air Conditioner Efficiency Monitoring and Optimization System
 
 ## Overview
-The Indoor Farming Climate Monitoring and Control System is a sophisticated platform designed to optimize growing conditions in indoor farming environments. This system is essential for farm operators, managers, and technicians who seek to maintain the perfect climate for crop growth, ensuring high yields and sustainable practices.
+The Air Conditioner Efficiency Monitoring and Optimization System is an innovative solution designed to enhance comfort and energy efficiency in residential environments. This platform is pivotal for homeowners interested in optimizing their air conditioning usage, reducing energy costs, and maintaining an ideal indoor climate. By leveraging real-time data and predictive analytics, the system ensures the air conditioning operates only when necessary, contributing to sustainable living practices.
 
 ## Contributors
 - Thitiphum Chaikarnjanakit
@@ -9,32 +9,34 @@ The Indoor Farming Climate Monitoring and Control System is a sophisticated plat
 - Saponrachate​ Thamrongweingpung​
 
 ## Stakeholders
-- **Farm Operators:** Directly interact with the system on a daily basis for monitoring and adjustments.
-- **Farm Managers:** Use the system for strategic planning and decision-making.
-- **Agricultural Scientists:** Analyze data for research and provide insights for improving farming techniques.
-- **Technical Support Team:** Maintain and troubleshoot the system.
-- **Investors/Farm Owners:** Interested in the overall productivity and efficiency of the farm.
+- **Homeowners:** Primary users who interact with the system to monitor and control their indoor climate.
+- **Energy Consultants:** Use the system data to provide recommendations for energy savings and efficiency improvements.
+- **HVAC Technicians:** Offer technical support and use system insights for maintenance and optimization services.
+- **Utility Companies:** Interested in promoting energy-efficient practices among consumers.
+- **Environmental Advocates:** Focus on the system's role in reducing carbon footprints through efficient energy use.
 
 ## User Stories
-- **As a farm operator:** I want to monitor real-time temperature and humidity levels to ensure optimal growing conditions for my crops.
+- **As a homeowner:** I want to easily check the current temperature and humidity in my home through a simple web page, so that I can understand my home's climate without needing technical knowledge about the sensors or data collection methods.
    - **Acceptance Criteria:**
-     1. The system displays real-time temperature and humidity data.
-     2. Data from all sensors is updated every 5 minutes.
-     3. Users can access historical data trends and analysis.
-- **As a farm manager:** I need to be alerted immediately when temperature or humidity levels deviate from the set thresholds to prevent potential crop damage.
+     1. The system displays real-time temperature and humidity data on a web interface.
+     2. Information updates automatically, reflecting the latest sensor readings.
+     3. The interface provides an option to view a summary of daily climate trends.
+
+- **As a homeowner:** I want to receive an estimate of how long it will take to reach my preferred temperature if I turn on the air conditioner now, so that I can make informed decisions about the best time to adjust my AC settings for comfort and efficiency.
    - **Acceptance Criteria:**
-     1. The system sends instant alerts via email/SMS when thresholds are breached.
-     2. Alerts contain specific details about the breach (which sensor, current reading).
-     3. The system records all instances of threshold breaches for review.
-- **As a farm technician:** I want to access the system remotely to make necessary adjustments and troubleshoot issues.
+     1. Users can input or select their current indoor temperature and desired comfort level through the web interface.
+     2. The system provides a clear estimate of how long it will take to cool the room to the desired temperature.
+     3. Predictions consider historical temperature and humidity data to improve accuracy.
+
+- **As a homeowner:** I want to be alerted if my air conditioner has been running for an extended period, such as more than 8 hours, so that I can make conscious decisions about energy use and possibly adjust settings to prevent unnecessary operation.
    - **Acceptance Criteria:**
-     1. The system is accessible remotely via various devices.
-     2. Users can make and save adjustments to settings remotely.
-     3. The system provides secure access with authentication protocols.
+     1. The system monitors air conditioner runtime and automatically alerts the user if it exceeds the set threshold (e.g., 8 hours).
+     2. Users receive a user-friendly reminder or alert, suggesting they check if continued AC operation is necessary.
+     3. Users have options to acknowledge the alert, snooze it for a certain period, or adjust settings directly if the interface supports it.
 
 ## Features
 - **Real-Time Monitoring:** Continuous tracking of temperature and humidity with live updates.
-- **Automated Alerts:** Customizable alerts for deviations from optimal growing conditions.
-- **Historical Data Analysis:** Access and analyze past environmental data for better future decision-making.
-- **Remote Accessibility:** Manage and monitor the system from any location.
-- **Security and Reliability:** Secure data handling and reliable system performance.
+- **Predictive Cooling Time Analysis:** Estimates the time required to reach desired temperatures, facilitating efficient AC use.
+- **Automated Alerts:** Customizable alerts for extended AC operation, promoting energy conservation.
+- **User-Friendly Interface:** Easy-to-use web interface for monitoring and controlling indoor climate.
+- **Security and Reliability:** Ensures secure data handling and reliable system performance.
