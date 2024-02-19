@@ -34,13 +34,12 @@ The Air Conditioner Efficiency Monitoring and Optimization System is an innovati
      2. Users receive a user-friendly reminder or alert, suggesting they check if continued AC operation is necessary.
      3. Users have options to acknowledge the alert, snooze it for a certain period, or adjust settings directly if the interface supports it.
 
-- **Database Design:**
-   ![image](https://github.com/thitiphum-bluesage/ICT720work/assets/123978441/96941079-b802-4bb5-96c3-02fe092be475)
-
-
 ## Features
 - **Real-Time Monitoring:** Continuous tracking of temperature and humidity with live updates.
 - **Predictive Cooling Time Analysis:** Estimates the time required to reach desired temperatures, facilitating efficient AC use.
 - **Automated Alerts:** Customizable alerts for extended AC operation, promoting energy conservation.
 - **User-Friendly Interface:** Easy-to-use web interface for monitoring and controlling indoor climate.
 - **Security and Reliability:** Ensures secure data handling and reliable system performance.
+
+## Database Design
+   ![image](https://github.com/thitiphum-bluesage/ICT720work/assets/123978441/96941079-b802-4bb5-96c3-02fe092be475)
