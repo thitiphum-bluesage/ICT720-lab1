@@ -42,7 +42,12 @@ The Air Conditioner Efficiency Monitoring and Optimization System is an innovati
 - **Security and Reliability:** Ensures secure data handling and reliable system performance.
 
 ## State Diagram
-   ![image](https://github.com/thitiphum-bluesage/ICT720work/assets/123978441/8fa13ca0-b46e-4dc5-822d-d0f53de26253)
+   ![image](https://github.com/thitiphum-bluesage/ICT720work/assets/123978441/b220625c-9084-4edd-8204-203d40d110ff)
+
+
+## Sequence Diagram
+   ![image](https://github.com/thitiphum-bluesage/ICT720work/assets/123978441/cfb3a324-acb0-4785-9ba4-a7ee0b80b30a)
+
 
 ## Database Design
    ![image](https://github.com/thitiphum-bluesage/ICT720work/assets/123978441/96941079-b802-4bb5-96c3-02fe092be475)
