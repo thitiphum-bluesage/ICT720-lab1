@@ -10,6 +10,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ou_root
       MONGO_INITDB_ROOT_PASSWORD: ou_secret
+      MONGO_INITDB_DATABASE: iot_project
 
 volumes:
   ou_data:
