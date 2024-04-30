@@ -1,0 +1,15 @@
+version: "3"
+services:
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - ou_data:/data/db
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ou_root
+      MONGO_INITDB_ROOT_PASSWORD: ou_secret
+
+volumes:
+  ou_data:
