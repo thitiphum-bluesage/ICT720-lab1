@@ -1,2 +1,5 @@
 /main_server/node_modules
 /main_server/.env
+
+/dataCollection/.pio
+/dataCollection/.vscode
