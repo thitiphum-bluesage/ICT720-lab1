@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const mqttClient = require("./mqtt/mqttClient");
 require("dotenv").config();
 
 const app = express();
