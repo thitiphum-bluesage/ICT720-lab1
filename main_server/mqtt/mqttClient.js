@@ -1,4 +1,5 @@
 const mqtt = require("mqtt");
+const sensorDataController = require("../controllers/sensorDataController");
 
 // MQTT broker configuration
 const brokerUrl = "mqtt://broker.hivemq.com:1883";
@@ -27,7 +28,9 @@ client.on("message", (topic, message) => {
       console.log(`Temperature: ${temperature}`);
       console.log(`Humidity: ${humidity}`);
       console.log(`Device ID: ${device_id}`);
-      // Store here
+
+      // Update the latest data for the device
+      sensorDataController.updateLatestData(temperature, humidity, device_id);
     } catch (error) {
       console.error("Error parsing JSON:", error);
     }

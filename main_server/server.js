@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const mqttClient = require("./mqtt/mqttClient");
+const sensorDataRoutes = require("./routes/sensorDataRoutes");
 require("dotenv").config();
 
 const app = express();
@@ -18,6 +19,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+app.use("/", sensorDataRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
