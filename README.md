@@ -50,11 +50,38 @@ The Air Conditioner Efficiency Monitoring and Optimization System is an innovati
 
 ## State Diagram
 
-![image](https://github.com/thitiphum-bluesage/ICT720work/assets/123978441/b220625c-9084-4edd-8204-203d40d110ff)
+```mermaid
+stateDiagram-v2
+    [*] --> Idle: System starts
+    Idle --> Monitoring: Turn on AC
+    Monitoring --> Predicting: Request Prediction
+    Predicting --> Monitoring: Prediction Made
+    Monitoring --> Notifying: Usage Threshold Exceeded
+    Notifying --> Monitoring: Notification Acknowledged
+    Monitoring --> Idle: Turn off AC
+    Idle --> [*]: System ends
+```
 
 ## Sequence Diagram
 
-![image](https://github.com/thitiphum-bluesage/ICT720work/assets/123978441/cfb3a324-acb0-4785-9ba4-a7ee0b80b30a)
+```mermaid
+sequenceDiagram
+    participant Board
+    participant MQTT Broker
+    participant Main Server
+    participant Client
+
+    Board->>MQTT Broker: Publish Real-time Data
+    MQTT Broker->>Main Server: Forward Real-time Data
+    Main Server->>Client: Send Real-time Data
+    Client->>Main Server: Request Prediction
+    Main Server->>Main Server: Perform Prediction
+    Main Server->>Client: Send Prediction Result
+    Main Server->>Client: Send Notification (if needed)
+
+    Board->>Main Server: Send Training Cycle Data (via API)
+    Main Server->>Main Server: Store Training Cycle Data
+```
 
 ## Database Schema Diagram
 
