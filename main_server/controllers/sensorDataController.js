@@ -3,6 +3,7 @@ const latestData = {};
 exports.getLatestData = (req, res) => {
   const deviceId = req.params.device_id;
   const data = latestData[deviceId];
+  console.log("Retrieved data:", data);
 
   if (data) {
     res.status(200).json(data);
