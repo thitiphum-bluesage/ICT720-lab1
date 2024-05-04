@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const mqttClient = require("./mqtt/mqttClient");
 const sensorDataRoutes = require("./routes/sensorDataRoutes");
 const trainingCycleRoutes = require("./routes/trainingCycleRoutes");
+const userRoutes = require("./routes/userRoutes");
 require("dotenv").config();
 
 const app = express();
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 
 app.use("/device", sensorDataRoutes);
 app.use("/trainingCycles", trainingCycleRoutes);
+app.use("/users", userRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
