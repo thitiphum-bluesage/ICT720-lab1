@@ -8,11 +8,9 @@ const clientId = "main-server";
 const client = mqtt.connect(brokerUrl, { clientId });
 
 client.on("connect", () => {
-  console.log("MQTT Client Connected");
+  // console.log("MQTT Client Connected");
   client.subscribe("iot720ac/sensor/data", function (err) {
-    if (!err) {
-      console.log("Subscribed to topic 'iot720ac/sensor/data'");
-    } else {
+    if (err) {
       console.error("Subscription error:", err);
     }
   });
@@ -28,6 +26,7 @@ client.on("message", (topic, message) => {
       console.log(`Temperature: ${temperature}`);
       console.log(`Humidity: ${humidity}`);
       console.log(`Device ID: ${device_id}`);
+      console.log("------------------------------");
 
       // Update the latest data for the device
       sensorDataController.updateLatestData(temperature, humidity, device_id);
@@ -39,7 +38,7 @@ client.on("message", (topic, message) => {
 
 // Handle disconnection event
 client.on("close", () => {
-  console.log("Disconnected from MQTT broker");
+  // console.log("Disconnected from MQTT broker");
 });
 
 // Handle error event
