@@ -23,10 +23,15 @@ exports.registerUser = async (req, res) => {
     );
 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "mail.swordcodes.com",
+      port: 587,
+      secure: false,
       auth: {
         user: process.env.SYSEMAIL,
         pass: process.env.SYSEMAILPASS,
+      },
+      tls: {
+        rejectUnauthorized: false,
       },
     });
 
@@ -41,7 +46,6 @@ exports.registerUser = async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-
     res
       .status(200)
       .json({ message: "Confirmation email sent. Please check your email." });
