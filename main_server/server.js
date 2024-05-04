@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan");
 const mongoose = require("mongoose");
 const mqttClient = require("./mqtt/mqttClient");
 const sensorDataRoutes = require("./routes/sensorDataRoutes");
@@ -8,6 +9,7 @@ const deviceRoutes = require("./routes/deviceRoutes");
 require("dotenv").config();
 
 const app = express();
+app.use(morgan("dev"));
 
 const mongoURI = process.env.DB_URL;
 
