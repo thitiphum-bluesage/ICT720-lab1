@@ -6,5 +6,6 @@ router.post("/", trainingCycleController.createTrainingCycle);
 router.get("/", trainingCycleController.getAllTrainingCycles);
 router.get("/:device_id", trainingCycleController.getTrainingCyclesByDeviceId);
 router.delete("/clear", trainingCycleController.clearAllTrainingCycles);
+router.delete("/:id", trainingCycleController.deleteTrainingCycleById);
 
 module.exports = router;

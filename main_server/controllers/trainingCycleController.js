@@ -73,3 +73,22 @@ exports.clearAllTrainingCycles = async (req, res) => {
       .json({ error: "An error occurred while clearing the training cycles" });
   }
 };
+
+exports.deleteTrainingCycleById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const trainingCycle = await TrainingCycle.findByIdAndDelete(id);
+
+    if (!trainingCycle) {
+      return res.status(404).json({ error: "Training cycle not found" });
+    }
+
+    res.status(200).json({ message: "Training cycle deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting training cycle:", error);
+    res.status(500).json({
+      error: "An error occurred while deleting the training cycle",
+    });
+  }
+};
