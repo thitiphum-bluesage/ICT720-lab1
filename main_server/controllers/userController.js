@@ -7,9 +7,13 @@ exports.registerUser = async (req, res) => {
   try {
     const { email, password, username, name } = req.body;
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
     if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
+      return res
+        .status(400)
+        .json({
+          message: "User with the same email or username already exists",
+        });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -70,7 +74,7 @@ exports.confirmEmail = async (req, res) => {
     });
 
     await newUser.save();
-    es.status(200).json({
+    res.status(200).json({
       message: "Email confirmed and user registered successfully",
     });
   } catch (error) {
