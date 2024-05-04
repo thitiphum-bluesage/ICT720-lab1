@@ -3,15 +3,27 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
+#include <HTTPClient.h>
+#include <time.h>
 
 // Create an instance of the HTS221 sensor
 Adafruit_HTS221 hts;
 
+// Pin configuration
 const int SCLpin = 40;
 const int SDApin = 41;
 
-unsigned long startTime; // Variable to store the start time
-bool targetReached = false; // Flag to track if target temperature is reached
+// Server configuration
+const char* serverUrl = "http://62.72.58.117:3000";
+
+// Training cycle variables
+unsigned long startTime;
+bool targetReached = false;
+float targetTemperature;
+float startTemperature;
+float startHumidity;
+unsigned long timeUsed;
+float endHumidity;
 
 // WiFi credentials
 const char* ssid = "The ou 2.4G";
@@ -23,13 +35,13 @@ const int mqttPort = 1883;
 const char* mqttTopic = "iot720ac/sensor/data";
 const char* deviceId = "ou_bedroom";
 
+// Create WiFi and MQTT clients
 WiFiClient wifiClient;
 PubSubClient mqttClient(wifiClient);
 
 void setup() {
   // Initialize serial communication
   Serial.begin(115200);
-  // Wait for serial monitor to open on native USB devices
   while (!Serial) {
     delay(10);
   }
@@ -39,14 +51,12 @@ void setup() {
 
   // Initialize the HTS221 sensor
   if (!hts.begin_I2C()) {
-    // Failed to find HTS221 chip, halt here
     Serial.println("Failed to find HTS221 chip, check wiring!");
     while (1) {
       delay(10);
     }
   }
   Serial.println("HTS221 sensor ready!");
-  Serial.println("Target temperature: 28.0");
 
   // Connect to WiFi
   WiFi.begin(ssid, password);
@@ -59,7 +69,38 @@ void setup() {
   // Set up MQTT client
   mqttClient.setServer(mqttServer, mqttPort);
 
-  startTime = millis(); // Record the start time
+  // Retrieve the target temperature from the server
+  String targetTemperatureUrl = String(serverUrl) + "/devices/" + deviceId + "/target-temperature";
+  HTTPClient http;
+  http.begin(targetTemperatureUrl);
+  int httpResponseCode = http.GET();
+
+  if (httpResponseCode == 200) {
+    String response = http.getString();
+    DynamicJsonDocument jsonDoc(100);
+    DeserializationError error = deserializeJson(jsonDoc, response);
+
+    if (error) {
+      Serial.print("Failed to parse JSON: ");
+      Serial.println(error.c_str());
+    } else {
+      targetTemperature = jsonDoc["target_temperature"];
+      Serial.print("Target temperature retrieved: ");
+      Serial.println(targetTemperature);
+    }
+  } else {
+    Serial.print("Failed to retrieve target temperature. HTTP response code: ");
+    Serial.println(httpResponseCode);
+  }
+
+  http.end();
+
+  // Record the start time and initial sensor readings
+  startTime = millis();
+  sensors_event_t temp_event, humidity_event;
+  hts.getEvent(&humidity_event, &temp_event);
+  startTemperature = temp_event.temperature;
+  startHumidity = humidity_event.relative_humidity;
 }
 
 void reconnectMQTT() {
@@ -87,11 +128,8 @@ void loop() {
   hts.getEvent(&humidity_event, &temp_event);
 
   Serial.println("Sensor readings: ");
-
-  // Print the temperature and humidity data
   Serial.print("Temperature: ");
   Serial.println(temp_event.temperature);
-
   Serial.print("Humidity: ");
   Serial.println(humidity_event.relative_humidity);
 
@@ -109,12 +147,51 @@ void loop() {
   mqttClient.publish(mqttTopic, jsonString.c_str());
 
   // Check if the target temperature has been reached
-  if (temp_event.temperature <= 28.0 && !targetReached) {
-    unsigned long elapsedTime = (millis() - startTime) / 1000; // Calculate the elapsed time in seconds
+  if (temp_event.temperature <= targetTemperature && !targetReached) {
+    timeUsed = (millis() - startTime) / 1000; // Calculate the time used in seconds
+    endHumidity = humidity_event.relative_humidity;
 
     Serial.print("Target temperature reached in ");
-    Serial.print(elapsedTime);
+    Serial.print(timeUsed);
     Serial.println(" seconds!");
+
+    // Convert startTime to ISO 8601 format
+    time_t rawtime = startTime / 1000;
+    struct tm* timeinfo;
+    char buffer[25];
+    timeinfo = gmtime(&rawtime);
+    strftime(buffer, sizeof(buffer), "%Y-%m-%dT%H:%M:%SZ", timeinfo);
+    String isoTime = String(buffer);
+
+    // Create a JSON object for the training cycle data
+    DynamicJsonDocument trainingCycleDoc(300);
+    trainingCycleDoc["device_id"] = deviceId;
+    trainingCycleDoc["temp_start"] = startTemperature;
+    trainingCycleDoc["humi_start"] = startHumidity;
+    trainingCycleDoc["target_temp"] = targetTemperature;
+    trainingCycleDoc["time_use"] = timeUsed;
+    trainingCycleDoc["time_start"] = isoTime;
+    trainingCycleDoc["humi_end"] = endHumidity;
+
+    // Serialize the training cycle JSON object to a string
+    String trainingCycleString;
+    serializeJson(trainingCycleDoc, trainingCycleString);
+
+    // Send the training cycle data to the server
+    String trainingCycleUrl = String(serverUrl) + "/training-cycles";
+    HTTPClient http;
+    http.begin(trainingCycleUrl);
+    http.addHeader("Content-Type", "application/json");
+    int httpResponseCode = http.POST(trainingCycleString);
+
+    if (httpResponseCode == 201) {
+      Serial.println("Training cycle data sent successfully");
+    } else {
+      Serial.print("Failed to send training cycle data. HTTP response code: ");
+      Serial.println(httpResponseCode);
+    }
+
+    http.end();
 
     targetReached = true;
   }
