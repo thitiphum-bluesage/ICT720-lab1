@@ -2,8 +2,15 @@ const TrainingCycle = require("../models/trainingCycle");
 
 exports.createTrainingCycle = async (req, res) => {
   try {
-    const { device_id, temp_start, humi_start, target_temp, time_use } =
-      req.body;
+    const {
+      device_id,
+      temp_start,
+      humi_start,
+      target_temp,
+      time_use,
+      time_start,
+      humi_end,
+    } = req.body;
 
     const trainingCycle = new TrainingCycle({
       device_id,
@@ -11,6 +18,8 @@ exports.createTrainingCycle = async (req, res) => {
       humi_start,
       target_temp,
       time_use,
+      time_start,
+      humi_end,
     });
 
     await trainingCycle.save();
@@ -45,11 +54,22 @@ exports.getTrainingCyclesByDeviceId = async (req, res) => {
     res.status(200).json(trainingCycles);
   } catch (error) {
     console.error("Error getting training cycles by device_id:", error);
+    res.status(500).json({
+      error: "An error occurred while getting the training cycles by device_id",
+    });
+  }
+};
+
+exports.clearAllTrainingCycles = async (req, res) => {
+  try {
+    await TrainingCycle.deleteMany({});
+    res
+      .status(200)
+      .json({ message: "All training cycles cleared successfully" });
+  } catch (error) {
+    console.error("Error clearing training cycles:", error);
     res
       .status(500)
-      .json({
-        error:
-          "An error occurred while getting the training cycles by device_id",
-      });
+      .json({ error: "An error occurred while clearing the training cycles" });
   }
 };

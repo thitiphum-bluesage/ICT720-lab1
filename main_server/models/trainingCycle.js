@@ -21,6 +21,14 @@ const trainingCycleSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  time_start: {
+    type: Date,
+    required: true,
+  },
+  humi_end: {
+    type: Number,
+    required: true,
+  },
 });
 
 const TrainingCycle = mongoose.model("TrainingCycle", trainingCycleSchema);
