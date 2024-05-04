@@ -10,6 +10,10 @@ const deviceSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  target_temperature: {
+    type: Number,
+    required: true,
+  },
   username: {
     type: String,
     required: true,
