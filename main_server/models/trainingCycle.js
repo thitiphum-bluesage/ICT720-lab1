@@ -22,7 +22,7 @@ const trainingCycleSchema = new mongoose.Schema({
     required: true,
   },
   time_start: {
-    type: Date,
+    type: Number,
     required: true,
   },
   humi_end: {
