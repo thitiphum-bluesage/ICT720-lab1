@@ -2,7 +2,6 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const mqttClient = require("./mqtt/mqttClient");
-const sensorDataRoutes = require("./routes/sensorDataRoutes");
 const trainingCycleRoutes = require("./routes/trainingCycleRoutes");
 const userRoutes = require("./routes/userRoutes");
 const deviceRoutes = require("./routes/deviceRoutes");
@@ -25,7 +24,6 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.use("/device", sensorDataRoutes);
 app.use("/training-cycles", trainingCycleRoutes);
 app.use("/users", userRoutes);
 app.use("/devices", deviceRoutes);

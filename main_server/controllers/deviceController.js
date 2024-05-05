@@ -61,3 +61,57 @@ exports.getTargetTemperature = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+exports.updateMaxDuration = async (req, res) => {
+  try {
+    const { device_id } = req.params;
+    const { max_duration } = req.body;
+
+    const device = await Device.findOne({ device_id });
+    if (!device) {
+      return res.status(404).json({ message: "Device not found" });
+    }
+
+    device.max_duration = max_duration !== undefined ? max_duration : null;
+    await device.save();
+
+    res.status(200).json({ message: "Max duration updated successfully" });
+  } catch (error) {
+    console.error("Error updating max duration:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+exports.getMaxDuration = async (req, res) => {
+  try {
+    const { device_id } = req.params;
+
+    const device = await Device.findOne({ device_id });
+    if (!device) {
+      return res.status(404).json({ message: "Device not found" });
+    }
+
+    res.status(200).json({ max_duration: device.max_duration });
+  } catch (error) {
+    console.error("Error getting max duration:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const latestData = {};
+
+exports.getLatestData = (req, res) => {
+  const deviceId = req.params.device_id;
+  const data = latestData[deviceId];
+  console.log("Retrieved data:", data);
+
+  if (data) {
+    res.status(200).json(data);
+  } else {
+    res.status(404).json({ error: "Device not found" });
+  }
+};
+
+exports.updateLatestData = (temperature, humidity, deviceId) => {
+  latestData[deviceId] = { temperature, humidity };
+};

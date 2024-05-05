@@ -18,6 +18,10 @@ const deviceSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  max_duration: {
+    type: Number,
+    default: null,
+  },
 });
 
 const Device = mongoose.model("Device", deviceSchema);
