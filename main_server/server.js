@@ -6,6 +6,7 @@ const trainingCycleRoutes = require("./routes/trainingCycleRoutes");
 const userRoutes = require("./routes/userRoutes");
 const deviceRoutes = require("./routes/deviceRoutes");
 const alertRoutes = require("./routes/alertRoutes");
+const predictionRoutes = require("./routes/predictionRoutes");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -30,6 +31,7 @@ app.use("/training-cycles", trainingCycleRoutes);
 app.use("/users", userRoutes);
 app.use("/devices", deviceRoutes);
 app.use("/alerts", alertRoutes);
+app.use("/predict", predictionRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
