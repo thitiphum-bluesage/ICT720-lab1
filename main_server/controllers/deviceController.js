@@ -214,3 +214,16 @@ exports.addUserToDevice = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+exports.getDevicesByUserId = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const devices = await Device.find({ user_ids: userId });
+
+    res.status(200).json(devices);
+  } catch (error) {
+    console.error("Error getting devices by user ID:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
