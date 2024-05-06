@@ -6,6 +6,7 @@ const trainingCycleRoutes = require("./routes/trainingCycleRoutes");
 const userRoutes = require("./routes/userRoutes");
 const deviceRoutes = require("./routes/deviceRoutes");
 const alertRoutes = require("./routes/alertRoutes");
+const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
