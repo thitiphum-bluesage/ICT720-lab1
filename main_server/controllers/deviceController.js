@@ -24,6 +24,50 @@ exports.registerDevice = async (req, res) => {
   }
 };
 
+// Get a device by device_id
+exports.getDevice = async (req, res) => {
+  try {
+    const { device_id } = req.params;
+
+    const device = await Device.findOne({ device_id });
+    if (!device) {
+      return res.status(404).json({ message: "Device not found" });
+    }
+
+    res.status(200).json(device);
+  } catch (error) {
+    console.error("Error getting device:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+// Update a device by device_id
+exports.updateDevice = async (req, res) => {
+  try {
+    const { device_id } = req.params;
+    const { description, target_temperature, user_ids, max_duration } =
+      req.body;
+
+    const device = await Device.findOne({ device_id });
+    if (!device) {
+      return res.status(404).json({ message: "Device not found" });
+    }
+
+    device.description = description || device.description;
+    device.target_temperature = target_temperature || device.target_temperature;
+    device.user_ids = user_ids || device.user_ids;
+    device.max_duration =
+      max_duration !== undefined ? max_duration : device.max_duration;
+
+    await device.save();
+
+    res.status(200).json({ message: "Device updated successfully" });
+  } catch (error) {
+    console.error("Error updating device:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 exports.updateTargetTemperature = async (req, res) => {
   try {
     const { device_id } = req.params;

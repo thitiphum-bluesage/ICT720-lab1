@@ -14,10 +14,12 @@ const deviceSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  username: {
-    type: String,
-    required: true,
-  },
+  user_ids: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
   max_duration: {
     type: Number,
     default: null,

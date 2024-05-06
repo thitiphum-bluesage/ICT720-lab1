@@ -3,6 +3,8 @@ const router = express.Router();
 const deviceController = require("../controllers/deviceController");
 
 router.post("/register", deviceController.registerDevice);
+router.get("/:device_id", deviceController.getDevice);
+router.put("/:device_id", deviceController.updateDevice);
 router.put(
   "/:device_id/target-temperature",
   deviceController.updateTargetTemperature
