@@ -7,8 +7,8 @@ The Air Conditioner Efficiency Monitoring and Optimization System is an innovati
 ## Contributors
 
 - Thitiphum Chaikarnjanakit
-- Witchaworn Munkong
-- Saponrachate​ Thamrongweingpung​
+- Saponrachate​ Thamrongweingpung
+- ​Witchaworn Munkong
 
 ## Stakeholders
 
