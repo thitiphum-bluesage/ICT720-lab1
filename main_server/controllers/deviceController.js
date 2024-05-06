@@ -1,4 +1,5 @@
 const Device = require("../models/device");
+const User = require("../models/user");
 
 exports.registerDevice = async (req, res) => {
   try {
@@ -174,4 +175,42 @@ exports.getLatestData = (req, res) => {
 
 exports.updateLatestData = (temperature, humidity, deviceId) => {
   latestData[deviceId] = { temperature, humidity };
+};
+
+exports.addUserToDevice = async (req, res) => {
+  try {
+    const { device_id } = req.params;
+    const { user_id } = req.body;
+
+    console.log("Device ID:", device_id);
+    console.log("User ID:", user_id);
+
+    const device = await Device.findOne({ device_id });
+    console.log("Device:", device);
+
+    if (!device) {
+      return res.status(404).json({ message: "Device not found" });
+    }
+
+    const user = await User.findById(user_id);
+    console.log("User:", user);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (device.user_ids.includes(user_id)) {
+      return res
+        .status(400)
+        .json({ message: "User already added to the device" });
+    }
+
+    device.user_ids.push(user_id);
+    await device.save();
+
+    res.status(200).json({ message: "User added to the device successfully" });
+  } catch (error) {
+    console.error("Error adding user to device:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };

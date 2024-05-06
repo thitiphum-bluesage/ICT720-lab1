@@ -7,15 +7,13 @@ exports.sendDurationExceededAlert = async (req, res) => {
   try {
     const { device_id, duration } = req.body;
 
-    const device = await Device.findOne({ device_id });
+    const device = await Device.findOne({ device_id }).populate("user_ids");
     if (!device) {
       return res.status(404).json({ message: "Device not found" });
     }
 
     if (device.max_duration && duration > device.max_duration) {
-      const userIds = device.user_ids;
-      const users = await User.find({ _id: { $in: userIds } });
-      const userEmails = users.map((user) => user.email);
+      const userEmails = device.user_ids.map((user) => user.email);
 
       const transporter = nodemailer.createTransport({
         host: "mail.swordcodes.com",
@@ -66,6 +64,16 @@ exports.getAlerts = async (req, res) => {
     res.status(200).json(alerts);
   } catch (error) {
     console.error("Error getting alerts:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+exports.clearAlerts = async (req, res) => {
+  try {
+    await Alert.deleteMany({});
+    res.status(200).json({ message: "Alerts cleared successfully" });
+  } catch (error) {
+    console.error("Error clearing alerts:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };

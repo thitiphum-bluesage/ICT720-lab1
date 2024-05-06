@@ -24,6 +24,9 @@ float startTemperature;
 float startHumidity;
 unsigned long timeUsed;
 float endHumidity;
+unsigned long maxDuration = 0;
+bool durationAlertSent = false;
+
 
 // WiFi credentials
 const char* ssid = "The ou 2.4G";
@@ -112,6 +115,31 @@ void setup() {
     }
     http.end();
 
+    String maxDurationUrl = String(serverUrl) + "/devices/" + deviceId + "/max-duration";
+    http.begin(maxDurationUrl);
+    httpResponseCode = http.GET();
+    if (httpResponseCode == 200) {
+        String response = http.getString();
+        DynamicJsonDocument jsonDoc(100);
+        DeserializationError error = deserializeJson(jsonDoc, response);
+        if (error) {
+            Serial.print("Failed to parse JSON: ");
+            Serial.println(error.c_str());
+        } else {
+            if (!jsonDoc["max_duration"].isNull()) {
+                maxDuration = jsonDoc["max_duration"]; // Assign the retrieved value to maxDuration
+                Serial.print("Max duration retrieved: ");
+                Serial.println(maxDuration);
+            } else {
+                Serial.println("Max duration is null");
+            }
+        }
+    } else {
+        Serial.print("Failed to retrieve max duration. HTTP response code: ");
+        Serial.println(httpResponseCode);
+    }
+    http.end();
+
     configTime(0, 0, "pool.ntp.org");
     while (time(nullptr) < 1618000000) {
         delay(1000);
@@ -152,9 +180,12 @@ void loop() {
 
     mqttClient.publish(mqttTopic, jsonString.c_str());
 
+    unsigned long currentTime = time(nullptr);
+    timeUsed = (currentTime - startTime);
+
     if (temp_event.temperature <= targetTemperature && !targetReached) {
         unsigned long currentTime = time(nullptr);
-        timeUsed = (currentTime - startTime);
+        
         endHumidity = humidity_event.relative_humidity;
 
         Serial.print("Target temperature reached in ");
@@ -188,6 +219,31 @@ void loop() {
         http.end();
 
         targetReached = true;
+    }
+
+    if (timeUsed >= maxDuration && maxDuration > 0 && !durationAlertSent)  {
+        // Send duration exceeded alert to the server
+        DynamicJsonDocument alertDoc(200);
+        alertDoc["device_id"] = deviceId;
+        alertDoc["duration"] = timeUsed;
+
+        String alertString;
+        serializeJson(alertDoc, alertString);
+
+        String alertUrl = String(serverUrl) + "/alerts/duration-exceeded";
+        HTTPClient http;
+        http.begin(alertUrl);
+        http.addHeader("Content-Type", "application/json");
+        int httpResponseCode = http.POST(alertString);
+
+        if (httpResponseCode == 200) {
+            Serial.println("Duration exceeded alert sent successfully");
+            durationAlertSent = true; 
+        } else {
+            Serial.print("Failed to send duration exceeded alert. HTTP response code: ");
+            Serial.println(httpResponseCode);
+        }
+        http.end();
     }
 
     delay(10000); // Delay between readings

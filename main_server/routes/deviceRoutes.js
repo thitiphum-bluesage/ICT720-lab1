@@ -20,4 +20,6 @@ router.get("/:device_id/max-duration", deviceController.getMaxDuration);
 
 router.get("/latestData/:device_id", deviceController.getLatestData);
 
+router.post("/:device_id/users", deviceController.addUserToDevice);
+
 module.exports = router;
