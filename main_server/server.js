@@ -27,6 +27,7 @@ app.get("/", (req, res) => {
 app.use("/training-cycles", trainingCycleRoutes);
 app.use("/users", userRoutes);
 app.use("/devices", deviceRoutes);
+app.use("/alerts", alertRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
