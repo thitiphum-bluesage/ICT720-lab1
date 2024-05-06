@@ -5,6 +5,7 @@ const mqttClient = require("./mqtt/mqttClient");
 const trainingCycleRoutes = require("./routes/trainingCycleRoutes");
 const userRoutes = require("./routes/userRoutes");
 const deviceRoutes = require("./routes/deviceRoutes");
+const alertRoutes = require("./routes/alertRoutes");
 require("dotenv").config();
 
 const app = express();
