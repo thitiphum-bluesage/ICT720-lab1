@@ -103,12 +103,14 @@ sequenceDiagram
 
 ### Device Collection
 
-| Field       | Type     |
-| ----------- | -------- |
-| \_id        | String   |
-| device_id   | String   |
-| description | String   |
-| user_ids    | []String |
+| Field              | Type     |
+| ------------------ | -------- |
+| \_id               | String   |
+| device_id          | String   |
+| description        | String   |
+| user_ids           | []String |
+| target_temperature | Number   |
+| max_duration       | Number   |
 
 ### Training Cycle Collection
 
