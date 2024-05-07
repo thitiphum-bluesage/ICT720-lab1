@@ -114,15 +114,14 @@ sequenceDiagram
 
 ### Training Cycle Collection
 
-| Field        | Type   |
-| ------------ | ------ |
-| \_id         | String |
-| device_id    | String |
-| temp_start   | Number |
-| humi_start   | Number |
-| target_temp  | Number |
-| max_duration | Number |
-| time_use     | Number |
+| Field       | Type   |
+| ----------- | ------ |
+| \_id        | String |
+| device_id   | String |
+| temp_start  | Number |
+| humi_start  | Number |
+| target_temp | Number |
+| time_use    | Number |
 
 ### Alert Collection
 
