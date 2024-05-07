@@ -20,21 +20,27 @@ The Air Conditioner Efficiency Monitoring and Optimization System is an innovati
 
 ## User Stories
 
-- **As a homeowner:** I want to easily check the current temperature and humidity in my home through a simple web page, so that I can understand my home's climate without needing technical knowledge about the sensors or data collection methods.
+### User Story 1: Real-time Temperature and Humidity Monitoring
+
+- **As a homeowner:** I want to easily check the current temperature and humidity in my home through a simple web interface, so that I can understand my home's climate without needing technical knowledge about the sensors or data collection methods.
 
   - **Acceptance Criteria:**
     1.  The system displays real-time temperature and humidity data on a web interface.
     2.  Information updates automatically, reflecting the latest sensor readings.
-    3.  The interface provides an option to view a summary of daily climate trends.
 
 - **As a homeowner:** I want to receive an estimate of how long it will take to reach my preferred temperature if I turn on the air conditioner now, so that I can make informed decisions about the best time to adjust my AC settings for comfort and efficiency.
 
-  - **Acceptance Criteria:**
-    1.  Users can input or select their current indoor temperature and desired comfort level through the web interface.
-    2.  The system provides a clear estimate of how long it will take to cool the room to the desired temperature.
-    3.  Predictions consider historical temperature and humidity data to improve accuracy.
+### User Story 2: Air Conditioner Efficiency Prediction
 
-- **As a homeowner:** I want to be alerted if my air conditioner has been running for an extended period, such as more than 8 hours, so that I can make conscious decisions about energy use and possibly adjust settings to prevent unnecessary operation.
+- **As a homeowner:** I want to receive an estimate of how long it will take to reach my preferred temperature if I turn on the air conditioner now, so that I can make informed decisions about the best time to adjust my AC settings for comfort and efficiency.
+
+- **Acceptance Criteria:**
+  1.  Users can input or select their current indoor temperature and desired comfort level through the web interface.
+  2.  The system provides a clear estimate of how long it will take to cool the room to the desired temperature using predictions based on historical temperature and humidity data.accuracy.
+
+### User Story 3: Air Conditioner Usage Alert
+
+- **As a homeowner:** I want to be alerted if my air conditioner has been running for an extended period, such as more than the maximum duration set, so that I can make conscious decisions about energy use and possibly adjust settings to prevent unnecessary operation.
   - **Acceptance Criteria:**
     1.  The system monitors air conditioner runtime and automatically alerts the user if it exceeds the set threshold (e.g., 8 hours).
     2.  Users receive a user-friendly reminder or alert, suggesting they check if continued AC operation is necessary.
