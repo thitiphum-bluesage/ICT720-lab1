@@ -51,10 +51,7 @@ function Dashboard() {
     try {
       const deviceId = prompt("Enter the device ID:");
       if (deviceId) {
-        await axios.post("http://62.72.58.117:3000/devices/register", {
-          device_id: deviceId,
-          description: "",
-          target_temperature: 0,
+        await axios.post(`http://62.72.58.117:3000/devices/${deviceId}/users`, {
           user_id: user.userId,
         });
         fetchDevices(user.userId);
